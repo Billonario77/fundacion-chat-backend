@@ -1,0 +1,23 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const auth_1 = require("../middleware/auth");
+const turnosController_1 = require("../controllers/turnosController");
+const router = (0, express_1.Router)();
+router.use(auth_1.authenticateToken);
+router.get('/mis-solicitudes', turnosController_1.misSolicitudes);
+router.get('/mis-turnos', auth_1.requireGuia, turnosController_1.misTurnos);
+router.get('/historial', turnosController_1.getHistorialTurnos);
+router.post('/marcar-cancelaciones-vistas', turnosController_1.marcarCancelacionesComoVistas);
+router.get('/cancelaciones-no-vistas', turnosController_1.hayCancelacionesNoVistas);
+router.post('/solicitar', turnosController_1.solicitarApoyo);
+router.patch('/:turnoId/cancelar', turnosController_1.cancelarTurno);
+router.post('/:turnoId/reprogramar', turnosController_1.reprogramarTurno);
+router.patch('/:turnoId/estado', turnosController_1.actualizarEstadoTurno);
+router.get('/:turnoId', turnosController_1.obtenerTurnoPorId);
+router.get('/cancelaciones-no-vistas/count', auth_1.authenticateToken, turnosController_1.contarCancelacionesNoVistas);
+router.get('/admin/cancelaciones', auth_1.authenticateToken, turnosController_1.obtenerCancelacionesAdmin);
+router.get('/admin/cancelaciones/metricas', auth_1.authenticateToken, turnosController_1.obtenerMetricasCancelaciones);
+router.get('/admin/historial', auth_1.authenticateToken, turnosController_1.getHistorialAdmin);
+exports.default = router;
+//# sourceMappingURL=turnosRoutes.js.map

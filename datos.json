@@ -1,0 +1,6 @@
+﻿{
+    "nombre": "Usuario Prueba",
+    "email": "test@ejemplo.com",
+    "password": "password123",
+    "tipo": "usuario"
+}

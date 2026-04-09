@@ -1,0 +1,23 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const adminController_1 = require("../controllers/adminController");
+const auth_1 = require("../middleware/auth");
+const router = (0, express_1.Router)();
+console.log('✅ adminRoutes.ts cargado - rutas disponibles:');
+console.log('   POST /reprogramaciones/:solicitudId/crear-turno');
+router.use(auth_1.authenticateToken);
+router.get('/reprogramaciones/pendientes', adminController_1.getSolicitudesPendientes);
+router.post('/reprogramaciones/:solicitudId/asignar', adminController_1.asignarGuia);
+router.post('/reprogramaciones/:solicitudId/crear-turno', adminController_1.crearTurnoReprogramado);
+router.get('/reprogramaciones/pendientes/count', auth_1.authenticateToken, adminController_1.contarReprogramacionesPendientes);
+router.get('/guias/disponibles', adminController_1.getGuiasDisponibles);
+router.get('/turnos/pendientes-asignacion', adminController_1.getTurnosPendientesAsignacion);
+router.post('/turnos/:turnoId/asignar-guia', adminController_1.asignarGuiaATurno);
+router.get('/asignaciones/guias-con-usuarios', adminController_1.getGuiasConUsuarios);
+router.get('/asignaciones/buscar-usuario', adminController_1.buscarUsuarioConGuia);
+router.get('/guias', adminController_1.getTodosGuias);
+router.get('/usuarios', adminController_1.getTodosUsuarios);
+router.get('/usuarios-con-guia', adminController_1.getTodosUsuariosConGuia);
+exports.default = router;
+//# sourceMappingURL=adminRoutes.js.map
