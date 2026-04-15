@@ -14,6 +14,9 @@ const router = Router();
 // Rutas públicas
 router.post('/registro', validateRegistro, registro);
 router.post('/login', validateLogin, login);
+router.get('/test', (req, res) => {
+  res.json({ message: 'Auth routes working' });
+});
 
 // Rutas protegidas
 router.get('/perfil', authenticateToken, perfil);
